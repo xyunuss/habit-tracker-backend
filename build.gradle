@@ -36,13 +36,10 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	implementation 'org.postgresql:postgresql:42.6.0'
+	// H2 Database for testing
+	testImplementation 'com.h2database:h2'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
-}
-
-
-tasks.withType(Test) {
-    enabled = false
 }

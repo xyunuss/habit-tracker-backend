@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="htw.webtech.habit_tracker.HabitEntryControllerTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2025-12-25T12:30:47.101Z" hostname="MacBookPro" time="0.254">
+  <properties/>
+  <testcase name="getEntriesForDate_shouldReturnEntriesForSpecificDate()" classname="htw.webtech.habit_tracker.HabitEntryControllerTest" time="0.03"/>
+  <testcase name="getEntriesForHabit_shouldReturnEntries()" classname="htw.webtech.habit_tracker.HabitEntryControllerTest" time="0.014"/>
+  <testcase name="toggleEntry_shouldCreateNewEntry_whenNotExists()" classname="htw.webtech.habit_tracker.HabitEntryControllerTest" time="0.029"/>
+  <testcase name="setEntry_shouldSetCompletionStatus()" classname="htw.webtech.habit_tracker.HabitEntryControllerTest" time="0.023"/>
+  <testcase name="toggleEntry_shouldToggleExistingEntry()" classname="htw.webtech.habit_tracker.HabitEntryControllerTest" time="0.045"/>
+  <testcase name="deleteEntry_shouldReturn404_whenNotExists()" classname="htw.webtech.habit_tracker.HabitEntryControllerTest" time="0.026"/>
+  <testcase name="deleteEntry_shouldDeleteEntry()" classname="htw.webtech.habit_tracker.HabitEntryControllerTest" time="0.025"/>
+  <testcase name="toggleEntry_shouldReturnBadRequest_whenHabitNotFound()" classname="htw.webtech.habit_tracker.HabitEntryControllerTest" time="0.009"/>
+  <testcase name="getEntriesInRange_shouldReturnEntriesWithinDateRange()" classname="htw.webtech.habit_tracker.HabitEntryControllerTest" time="0.021"/>
+  <testcase name="getEntriesForHabit_shouldReturnEmptyList_whenNoEntriesExist()" classname="htw.webtech.habit_tracker.HabitEntryControllerTest" time="0.024"/>
+  <system-out><![CDATA[2025-12-25T13:30:47.087+01:00  INFO 80876 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [htw.webtech.habit_tracker.HabitEntryControllerTest]: HabitEntryControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-12-25T13:30:47.094+01:00  INFO 80876 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration htw.webtech.habit_tracker.HabitTrackerApplication for test class htw.webtech.habit_tracker.HabitEntryControllerTest
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
