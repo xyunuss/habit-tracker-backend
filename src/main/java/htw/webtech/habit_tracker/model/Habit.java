@@ -25,7 +25,7 @@ public class Habit {
     private String icon;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "type", nullable = false, columnDefinition = "VARCHAR(20) DEFAULT 'DAILY'")
     private HabitType type = HabitType.DAILY;
 
     // For WEEKLY type: how many times per week
