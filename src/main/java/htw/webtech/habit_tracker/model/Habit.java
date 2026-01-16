@@ -19,10 +19,11 @@ public class Habit {
 
     @NotBlank(message = "Name ist erforderlich")
     @Size(min = 1, max = 100, message = "Name muss zwischen 1 und 100 Zeichen haben")
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String name;
 
     @Size(max = 500, message = "Beschreibung darf maximal 500 Zeichen haben")
+    @Column(length = 500)
     private String description;
 
     private String color;
