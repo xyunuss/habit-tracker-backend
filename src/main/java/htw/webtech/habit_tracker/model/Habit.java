@@ -1,6 +1,8 @@
 package htw.webtech.habit_tracker.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Entity
@@ -15,9 +17,12 @@ public class Habit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Name ist erforderlich")
+    @Size(min = 1, max = 100, message = "Name muss zwischen 1 und 100 Zeichen haben")
     @Column(nullable = false)
     private String name;
 
+    @Size(max = 500, message = "Beschreibung darf maximal 500 Zeichen haben")
     private String description;
 
     private String color;
@@ -36,7 +41,8 @@ public class Habit {
     public Habit() {
     }
 
-    public Habit(Long id, String name, String description, String color, String icon, HabitType type, Integer targetPerWeek, LocalDate createdAt) {
+    public Habit(Long id, String name, String description, String color, String icon, HabitType type,
+            Integer targetPerWeek, LocalDate createdAt) {
         this.id = id;
         this.name = name;
         this.description = description;

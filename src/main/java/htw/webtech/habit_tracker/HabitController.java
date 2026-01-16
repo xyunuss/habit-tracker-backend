@@ -2,6 +2,7 @@ package htw.webtech.habit_tracker;
 
 import htw.webtech.habit_tracker.model.Habit;
 import htw.webtech.habit_tracker.service.HabitService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +34,7 @@ public class HabitController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createHabit(@RequestBody Habit habit) {
+    public ResponseEntity<?> createHabit(@Valid @RequestBody Habit habit) {
         try {
             // Validate required fields
             if (!habitService.isValidHabit(habit)) {
