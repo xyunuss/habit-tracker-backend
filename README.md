@@ -175,7 +175,7 @@ GitHub Actions führt bei jedem Push/PR automatisch aus:
 ## 🌐 Deployment
 
 Das Backend ist auf Render.com deployed:
-- **URL:** https://habit-tracker-backend-v21g.onrender.com
+- **URL:** URL zur Anwendung (z.B. `https://your-app.onrender.com`)
 - **Auto-Deploy:** Bei Push auf main Branch
 
 ## 📝 Lizenz
