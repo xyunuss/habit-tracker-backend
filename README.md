@@ -10,10 +10,13 @@ Das Backend des Habit Trackers ist eine REST API, die mit Spring Boot entwickelt
 
 ## 🛠️ Tech Stack
 
-- **Framework:** Spring Boot 3.5
+- **Framework:** Spring Boot 3.5.6
 - **Sprache:** Java 21
 - **Datenbank:** PostgreSQL (Production), H2 (Tests)
 - **Build Tool:** Gradle
+- **Validierung:** Jakarta Validation
+- **Testing:** JUnit 5, MockMvc, SpringBootTest
+- **CI/CD:** GitHub Actions
 - **Deployment:** Render.com
 
 ## 🚀 Schnellstart
@@ -64,6 +67,7 @@ Die API ist dann unter `http://localhost:8080` erreichbar.
 | Methode | Endpunkt | Beschreibung |
 |---------|----------|--------------|
 | GET | `/api/entries/habit/{habitId}` | Entries für einen Habit |
+| GET | `/api/entries/habit/{habitId}/range` | Entries in Zeitraum für Habit |
 | GET | `/api/entries/range` | Entries in Zeitraum (Query: startDate, endDate) |
 | GET | `/api/entries/date/{date}` | Entries für ein Datum |
 | POST | `/api/entries/toggle` | Entry togglen (check/uncheck) |
@@ -101,12 +105,16 @@ src/main/java/htw/webtech/habit_tracker/
 ├── HabitTrackerApplication.java    # Main Application + CORS Config
 ├── HabitController.java            # REST Controller für Habits
 ├── HabitEntryController.java       # REST Controller für Entries
+├── GlobalExceptionHandler.java     # Zentrale Fehlerbehandlung
 ├── model/
 │   ├── Habit.java                  # Entity: Gewohnheit
 │   └── HabitEntry.java             # Entity: Tageseintrag
-└── repository/
-    ├── HabitRepository.java        # JPA Repository für Habits
-    └── HabitEntryRepository.java   # JPA Repository für Entries
+├── repository/
+│   ├── HabitRepository.java        # JPA Repository für Habits
+│   └── HabitEntryRepository.java   # JPA Repository für Entries
+└── service/
+    ├── HabitService.java           # Business Logic für Habits
+    └── HabitEntryService.java      # Business Logic für Entries
 ```
 
 ## 🗄️ Datenmodell
@@ -115,8 +123,8 @@ src/main/java/htw/webtech/habit_tracker/
 | Feld | Typ | Beschreibung |
 |------|-----|--------------|
 | id | Long | Primärschlüssel |
-| name | String | Name der Gewohnheit (required) |
-| description | String | Kurze Beschreibung (optional) |
+| name | String | Name der Gewohnheit (required, 1-100 Zeichen) |
+| description | String | Kurze Beschreibung (optional, max 500 Zeichen) |
 | color | String | Farbe (blue, green, purple, etc.) |
 | icon | String | Emoji Icon (optional) |
 | type | Enum | DAILY oder WEEKLY |
@@ -133,16 +141,21 @@ src/main/java/htw/webtech/habit_tracker/
 
 ## 🔒 Sicherheit
 
-- Credentials werden über Umgebungsvariablen verwaltet
+- Credentials werden über Umgebungsvariablen verwaltet (`DB_URL`, `DB_USER`, `DB_PASSWORD`)
 - CORS ist für das Frontend konfiguriert
 - Keine sensiblen Daten im Repository
+- Input-Validierung mit Jakarta Validation (`@NotBlank`, `@Size`)
 
 ## 🧪 Tests
 
-Das Projekt enthält:
-- **Controller-Tests:** Testen der REST API mit MockMvc
-- **Repository-Tests:** Testen der Datenbankoperationen
-- **Integration-Tests:** End-to-End Tests mit H2 In-Memory DB
+Das Projekt enthält **30 Unit- und Integrationstests**:
+
+| Testklasse | Anzahl | Beschreibung |
+|------------|--------|--------------|
+| HabitControllerTest | 11 | REST API Tests für Habits |
+| HabitEntryControllerTest | 10 | REST API Tests für Entries |
+| HabitRepositoryTest | 8 | Datenbankoperationen |
+| HabitTrackerApplicationTests | 1 | Context-Load-Test |
 
 ```bash
 # Alle Tests ausführen
@@ -151,6 +164,13 @@ Das Projekt enthält:
 # Test-Report anzeigen
 open build/reports/tests/test/index.html
 ```
+
+## 🔄 CI/CD
+
+GitHub Actions führt bei jedem Push/PR automatisch aus:
+- Build mit Gradle
+- Alle Tests
+- Upload der Test-Reports als Artifacts
 
 ## 🌐 Deployment
 
